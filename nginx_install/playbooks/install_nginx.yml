@@ -1,15 +1,14 @@
 - hosts: webservers
+  become: yes
   tasks:
-    - name: Update apt cache
-      ansible.builtin.sudo:
-        password: password
-      apt:
-        update_cache: yes
-    - name: Install nginx
-      apt: name=nginx state=present
-    - name: Start nginx
-      service: name=nginx state=started
-    - name: Enable nginx
-      service: name=nginx enabled=yes
-    - name: Check nginx status
-      command: systemctl status nginx
+    tasks:
+    - name: update
+      apt: update_cache=yes
+    - name: Install Nginx
+      apt: name=nginx state=latest
+      notify:
+        - restart nginx
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted
+      
