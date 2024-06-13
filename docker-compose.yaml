@@ -1,32 +1,35 @@
-version: '3.8'
-
+version: '3'
 services:
-  master-node:
-      image: ubuntu-image
-      container_name: master-node
+  control-node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: control-node
+    networks:
+      ansible-networks:
+        ipv4_address: 10.0.15.10
+    volumes:
+      - ./ansible:/home/ansible/ansible
+    tty: true
 
-      networks:
-        ansible-networks:
-          ipv4_address: 10.0.15.10
-      stdin_open: true
-      tty: true
-    
-  ubuntu1:
-    image: ubuntu-image
-    container_name: ansible-node-1
+  target-node1:
+    build:
+      context: .
+      dockerfile: Dockerfile.target
+    container_name: target-node1
     networks:
       ansible-networks:
         ipv4_address: 10.0.15.101
-    stdin_open: true
     tty: true
 
-  ubuntu2:
-    image: ubuntu-image
-    container_name: ansible-node-2
+  target-node2:
+    build:
+      context: .
+      dockerfile: Dockerfile.target
+    container_name: target-node2
     networks:
       ansible-networks:
         ipv4_address: 10.0.15.102
-    stdin_open: true
     tty: true
 
 networks:

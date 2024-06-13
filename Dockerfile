@@ -1,14 +1,19 @@
-# ใช้ image ที่ติดตั้งพื้นฐานอยู่แล้ว
-FROM ubuntu:latest
+# Dockerfile for Control Node with pre-installed Ansible
+FROM python:3.9-slim
 
-# (ตัวอย่างเท่านั้น) ติดตั้งเครื่องมือที่ต้องการทดลอง
+# Install additional dependencies
 RUN apt-get update && apt-get install -y \
-    curl \
-    wget \
-    git \
+    ssh \
+    sshpass \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# ถ้าต้องการเพิ่มเครื่องมือเพิ่มเติมสามารถเพิ่มคำสั่ง RUN เพิ่มเติมได้
+# Install Ansible
+RUN pip install ansible
 
-# สร้างเป็น container เมื่อรัน Docker image
-CMD ["bash"]
+# Create a user for Ansible
+RUN useradd -m ansible
+
+# Switch to the ansible user
+USER ansible
+WORKDIR /home/ansible
