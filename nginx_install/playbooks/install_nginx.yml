@@ -1,7 +1,8 @@
 - hosts: webservers
   tasks:
     - name: Update apt cache
-      become: yes
+      ansible.builtin.sudo:
+        password: password
       apt:
         update_cache: yes
     - name: Install nginx
