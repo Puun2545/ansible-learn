@@ -1,5 +1,9 @@
 - hosts: webservers
   tasks:
+    - name: Update apt cache
+      become: yes
+      apt:
+        update_cache: yes
     - name: Install nginx
       apt: name=nginx state=present
     - name: Start nginx
