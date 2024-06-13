@@ -1,1 +1,11 @@
-- 
+--
+- host : webservers
+  tasks:
+    - name: Install nginx
+      apt: name=nginx state=present
+    - name: Start nginx
+      service: name=nginx state=started
+    - name: Enable nginx
+      service: name=nginx enabled=yes
+    - name: Check nginx status
+      command: systemctl status nginx
