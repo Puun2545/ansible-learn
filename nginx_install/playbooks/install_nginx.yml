@@ -1,5 +1,4 @@
---
-- host : webservers
+- hosts: webservers
   tasks:
     - name: Install nginx
       apt: name=nginx state=present
