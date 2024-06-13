@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  master-node:
+      image: ubuntu-image
+      container_name: master-node
+
+      networks:
+        ansible-networks:
+          ipv4_address: 10.0.15.10
+      stdin_open: true
+      tty: true
+    
+  ubuntu1:
+    image: ubuntu-image
+    container_name: ansible-node-1
+    networks:
+      ansible-networks:
+        ipv4_address: 10.0.15.101
+    stdin_open: true
+    tty: true
+
+  ubuntu2:
+    image: ubuntu-image
+    container_name: ansible-node-2
+    networks:
+      ansible-networks:
+        ipv4_address: 10.0.15.102
+    stdin_open: true
+    tty: true
+
+networks:
+  ansible-networks:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.15.0/24
+          gateway: 10.0.15.1
