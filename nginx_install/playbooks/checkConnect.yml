@@ -3,4 +3,4 @@
     - name: Check connectivity to webservers
       ping:
     - name: Check connectivity and run a command
-      command: /bin/echo "Hello, World!"
+      command: /bin/echo "Hello, World!" > test.txt
