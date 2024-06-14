@@ -1,4 +1,4 @@
-- hosts: webservers
+- hosts: jenkins
   tasks:
     - name: Check connectivity to webservers
       ping:
