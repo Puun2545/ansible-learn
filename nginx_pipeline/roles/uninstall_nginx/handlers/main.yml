@@ -1,7 +1,0 @@
----
-- name: check service status of nginx
-  ansible.builtin.service:
-    name: nginx
-    state: stopped
-    enabled: no
-  ignore_errors: yes

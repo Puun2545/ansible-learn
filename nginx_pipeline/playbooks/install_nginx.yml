@@ -1,4 +1,0 @@
-- hosts: slave-2
-  become: yes
-  roles:
-    - "../roles/nginx_webserver"

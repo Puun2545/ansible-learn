@@ -1,8 +1,0 @@
----
-- name: Uninstall Nginx
-  ansible.builtin.package:
-    name: nginx
-    state: absent
-  notify:
-    - check service status of nginx
-    
